@@ -1,3 +1,9 @@
+/**
+ * Interface ElementManager
+ * ----------------------------------------------------------
+ * Définition des méthodes pour manipuler les éléments de la base de données
+ */
+
 package Managers;
 
 import Classes.Element;
@@ -51,7 +57,15 @@ public interface ElementManager {
      */
     public ElementType getElementTypeById(long id);
 
+    /**
+     * Lister tous les types d'élément de la base de données
+     * @return liste des types d'élément existants
+     */
     public ArrayList<ElementType> getElementTypes();
 
+     /**
+     * Lister tous les matériaux de la base de données
+     * @return liste les matériaux existants
+     */
     public ArrayList<Material> getMaterials();
 }

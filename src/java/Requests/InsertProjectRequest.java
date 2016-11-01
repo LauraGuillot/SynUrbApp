@@ -1,19 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Classe InsertProjectRequest
+ * ----------------------------------------------------------
+ * Servlet appelée lorsqu'un utilisateur crée un nouveau projet.
+ * Celui-ci est sauvegardé sur le serveur et renvoyer à l'utilisateur.
  */
 package Requests;
 
 import Classes.Data;
 import Classes.DataSimple;
-import Classes.Project;
 import Managers.GpsgeomManager;
 import Managers.GpsgeomManagerImpl;
 import Managers.ProjectManager;
 import Managers.ProjectManagerImpl;
-import Managers.SyncManager;
-import Managers.SyncManagerImpl;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -41,8 +39,8 @@ public class InsertProjectRequest extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {    
-            out.println(request.getAttribute("data")); 
+        try (PrintWriter out = response.getWriter()) {
+            out.println(request.getAttribute("data"));
         }
     }
 
@@ -58,22 +56,22 @@ public class InsertProjectRequest extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         //On récupère le projet
         String datajson = request.getParameter("data");
         DataSimple d = JsonTransformer.JsontoData(datajson);
-        Data  data = d.toData();
-        
+        Data data = d.toData();
+
         //On sauvegarde le projet
         GpsgeomManager gman = GpsgeomManagerImpl.getInstance();
         gman.saveGpsgeom(data.getProject_gpsgeom());
         data.getProject().setGpsgeomId(data.getProject_gpsgeom());
         ProjectManager man = ProjectManagerImpl.getInstance();
         data.setProject(man.saveProject(data.getProject()));
-        
+
         //On envoie les données du projet
         String json = JsonTransformer.DatatoJson(data);
- 
+
         request.setAttribute("data", json);
         processRequest(request, response);
     }

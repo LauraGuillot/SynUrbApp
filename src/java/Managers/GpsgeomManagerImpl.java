@@ -1,6 +1,11 @@
+/**
+ * Classe GpsgeomManagerImpl
+ * ----------------------------------------------------------
+ * Implémentation de l'interface GpsgeomManager.
+ * Manipulation des gpsgeom de la base de données
+ */
 package Managers;
 
-import Classes.Element;
 import Classes.Gpsgeom;
 import Classes.Photo;
 import Classes.Project;
@@ -98,32 +103,44 @@ public class GpsgeomManagerImpl implements GpsgeomManager {
         q.setParameter("id", g.getGpsgeomId());
         List l = q.getResultList();
 
-        if (l.isEmpty() || !belongToProject(g,p)){
+        if (l.isEmpty() || !belongToProject(g, p)) {
             this.saveGpsgeom(g);
         } else {
             this.updateGpsgeom(g);
         }
     }
-    
-    
-    public boolean belongToProject(Gpsgeom gp, Project p){
-        return gp.getGpsgeomId()==p.getGpsgeomId().getGpsgeomId() || belongToProjectPhoto(gp,p);
+
+    /**
+     * Test si un gpsgeom est lié ou non à un projet. Il est "lié" si c'est la
+     * position gps du projet ou la localisation d'une de ses photos.
+     *
+     * @param gp gpsgeom
+     * @param p projet
+     * @return booléen
+     */
+    public boolean belongToProject(Gpsgeom gp, Project p) {
+        return gp.getGpsgeomId() == p.getGpsgeomId().getGpsgeomId() || belongToProjectPhoto(gp, p);
     }
 
+    /**
+     * Test si un gpsgeom est la localisation d'une des photos d'un projet
+     *
+     * @param gp gpsgeom
+     * @param p projet
+     * @return booléen
+     */
     private boolean belongToProjectPhoto(Gpsgeom gp, Project p) {
         EntityManager em = emf.createEntityManager();
-         Query q = em.createQuery("SELECT p FROM Photo p WHERE ( p.projectId =:id)");
+        Query q = em.createQuery("SELECT p FROM Photo p WHERE ( p.projectId =:id)");
         q.setParameter("id", p);
         List l = q.getResultList();
         boolean b = false;
-        for(Object o:l){
-            if(((Photo)o).getGpsgeomId().getGpsgeomId()==gp.getGpsgeomId()){
-                b=true;
+        for (Object o : l) {
+            if (((Photo) o).getGpsgeomId().getGpsgeomId() == gp.getGpsgeomId()) {
+                b = true;
             }
         }
         return b;
     }
 
-
-   
 }

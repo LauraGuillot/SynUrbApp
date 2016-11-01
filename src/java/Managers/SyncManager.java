@@ -1,3 +1,9 @@
+/**
+ * Interface SyncManager
+ * ----------------------------------------------------------
+ * Définition des méthodes pour la synchronisation de l'application
+ * android avec la base de données du serveur
+ */
 package Managers;
 
 import Classes.Data;
@@ -12,6 +18,5 @@ public interface SyncManager {
      * @return Id du projet mis à jour (ou ajouté)
      */
     public long UpdateData(Data d);
-    
-    
+
 }

@@ -1,7 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * CLASSE GpsGeomSimple
+ * ----------------------------------------------------------
+ * Cette classe représente un gpsgeom avec sa géométrie et son id.
+ * Elle a été crée dans un souci de compatibilité entre la classe gpsgeom de l'appliction android
+ * et la classe gpsgeom de ce web service qui correspond à la table de la base de donnée du serveur.
  */
 package Classes;
 
@@ -19,6 +21,10 @@ public class GpsGeomSimple {
         gpsGeom_thegeom = g.getGpsgeomThegeom();
     }
 
+    /**
+     * Conversion d'un gpsgeomSimple en gpsGeom
+     * @return gpsgeom 
+     */
     public Gpsgeom toGpsGeom() {
         Gpsgeom g = new Gpsgeom();
         g.setGpsgeomId(gpsGeom_id);

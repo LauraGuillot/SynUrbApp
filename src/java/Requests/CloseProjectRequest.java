@@ -1,7 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Classe CloseProjectRequest
+ * ----------------------------------------------------------
+ * Servlet appelée lorsqu'un utilisateur ferme un projet et souhaite
+ * enregistrer les modifications qu'il a faites.
  */
 package Requests;
 
@@ -11,7 +12,6 @@ import Managers.ProjectManager;
 import Managers.ProjectManagerImpl;
 import Managers.SyncManagerImpl;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -41,7 +41,7 @@ public class CloseProjectRequest extends HttpServlet {
         String datajson = request.getParameter("data");
         DataSimple d = JsonTransformer.JsontoData(datajson);
         Data data = d.toData();
-System.out.println(datajson);
+        System.out.println(datajson);
         //On ferme le projet
         ProjectManager projectManager = ProjectManagerImpl.getInstance();
         projectManager.setAvailable(data.getProject().getProjectId());

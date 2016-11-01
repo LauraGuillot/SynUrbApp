@@ -1,3 +1,9 @@
+/**
+ * Classe SyncManagerImpl
+ * ----------------------------------------------------------
+ * Implémentation de l'interface SyncManager.
+ * Synchronisation des bases de données
+ */
 package Managers;
 
 import Classes.Data;
@@ -36,7 +42,7 @@ public class SyncManagerImpl implements SyncManager {
 
         //Mise à jour de la position gps des photos
         for (Gpsgeom g : d.getPhotos_gpsgeom()) {
-            gpsgeomManager.sync(g,d.getProject());
+            gpsgeomManager.sync(g, d.getProject());
         }
         for (int i = 0; i < d.getPhotos().size(); i++) {
             d.getPhotos().get(i).setGpsgeomId(d.getPhotos_gpsgeom().get(i));
@@ -62,7 +68,6 @@ public class SyncManagerImpl implements SyncManager {
         }
 
         //Mise à jour des photos et des éléments
-      
         for (int i = 0; i < d.getPhotos().size(); i++) {
             Photo ph = d.getPhotos().get(i);
             ph = photoManager.sync(ph);
@@ -75,6 +80,12 @@ public class SyncManagerImpl implements SyncManager {
         return d.getProject().getProjectId();
     }
 
+    /**
+     * Préparation des données d'un projet pour l'export
+     *
+     * @param id Id du projet
+     * @return Données du projet
+     */
     public Data prepareExport(Long id) {
 
         //Projet
@@ -83,7 +94,6 @@ public class SyncManagerImpl implements SyncManager {
         //GPSgeom du projet
         Gpsgeom gps_p = p.getGpsgeomId();
 
-        
         //Photos
         Collection<Photo> photosCollect = projectManager.getPhotoOfProject(id);
         ArrayList<Photo> photos = new ArrayList<>();
@@ -92,19 +102,18 @@ public class SyncManagerImpl implements SyncManager {
         }
 
         // GPSgeom des photos 
-       
         ArrayList<Gpsgeom> gps_photos = new ArrayList<>();
         for (Photo ph : photos) {
             //GPS
-            gps_photos.add(ph.getGpsgeomId());  
+            gps_photos.add(ph.getGpsgeomId());
         }
-        
+
         //Element des photos
-         ArrayList<ArrayList<Element>> elements = new ArrayList<>();
-         for (Photo ph : photos) {
+        ArrayList<ArrayList<Element>> elements = new ArrayList<>();
+        for (Photo ph : photos) {
             ArrayList<Element> elem = photoManager.getElementsOfPhoto(ph);
             elements.add(elem);
-         }
+        }
 
         //PixelGeom des elements
         ArrayList<ArrayList<Pixelgeom>> gps_elements = new ArrayList<>();
@@ -113,11 +122,11 @@ public class SyncManagerImpl implements SyncManager {
             for (Element e : elem) {
                 pix.add(e.getPixelgeomId());
             }
-      
+
             gps_elements.add(pix);
         }
 
-        return new Data(p,gps_p,photos,gps_photos,elements,gps_elements);
+        return new Data(p, gps_p, photos, gps_photos, elements, gps_elements);
     }
 
 }

@@ -1,3 +1,10 @@
+/**
+ * Classe ElementManagerImpl
+ * ----------------------------------------------------------
+ * Implémentation de l'interface ElementManager.
+ * Manipulation des éléments de la base de données
+ */
+
 package Managers;
 
 import Classes.Element;
@@ -139,6 +146,10 @@ public class ElementManagerImpl implements ElementManager {
         return l.isEmpty() ? null : (Material) l.get(0);
     }
 
+    /**
+     * Lister tous les types d'élément de la base de données
+     * @return liste des types d'élément existants
+     */
     @Override
     public ArrayList<ElementType> getElementTypes() {
         EntityManager em = emf.createEntityManager();
@@ -152,6 +163,10 @@ public class ElementManagerImpl implements ElementManager {
         return m;
     }
 
+    /**
+     * Lister tous les matériaux de la base de données
+     * @return liste les matériaux existants
+     */
     @Override
     public ArrayList<Material> getMaterials() {
         EntityManager em = emf.createEntityManager();

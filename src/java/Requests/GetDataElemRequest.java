@@ -1,7 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Classe GetDataElemRequest
+ * ----------------------------------------------------------
+ * Servlet appelée lorsqu'un utilisateur définit des éléments sur une photo.
+ * Elle sert à obtenir la liste des matériaux ainsi que les types d'éléments disponibles.
  */
 package Requests;
 
@@ -9,7 +10,6 @@ import Classes.ElementType;
 import Classes.Material;
 import Managers.ElementManager;
 import Managers.ElementManagerImpl;
-import static com.sun.corba.se.spi.presentation.rmi.StubAdapter.request;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -37,14 +37,15 @@ public class GetDataElemRequest extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+       
+        //On récupère la liste des matériaux et la liste des types d'élément
         ElementManager man = ElementManagerImpl.getInstance();
-
         ArrayList<ElementType> types = man.getElementTypes();
         ArrayList<Material> mater = man.getMaterials();
-
         request.setAttribute("types", JsonTransformer.ListTypeToJson(types));
         request.setAttribute("mater", JsonTransformer.ListMaterToJson(mater));
 
+        //On envoie ces listes séparées par un #
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             out.println(request.getAttribute("types"));

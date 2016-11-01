@@ -1,9 +1,14 @@
+/**
+ * Classe PhotoManagerImpl
+ * ----------------------------------------------------------
+ * Implémentation de l'interface PhotoManager.
+ * Manipulation des photos de la base de données
+ */
 package Managers;
 
 import Classes.*;
 import Tools.DateMethods;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -156,7 +161,7 @@ public class PhotoManagerImpl implements PhotoManager {
     @Override
     public Photo sync(Photo p) {
         Photo p1 = this.getPhotoById(p.getPhotoId());
-        if (p1 == null|| p1.getProjectId().getProjectId()!=p.getProjectId().getProjectId()) {
+        if (p1 == null || p1.getProjectId().getProjectId() != p.getProjectId().getProjectId()) {
             p1 = this.savePhoto(p);
         } else {
             p1 = this.updatePhoto(p);

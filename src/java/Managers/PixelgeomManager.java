@@ -1,7 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Interface PixelGeomManager
+ * ----------------------------------------------------------
+ * Définition des méthodes pour manipuler les pixelgeom de la base de données
  */
 package Managers;
 
@@ -41,6 +41,7 @@ public interface PixelgeomManager {
      * sinon
      *
      * @param g pixelgeom à synchroniser
+     * @param p Projet
      */
     public void sync(Pixelgeom g, Project p);
 }

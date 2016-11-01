@@ -1,17 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Classe CloseRequest
+ * ----------------------------------------------------------
+ * Servlet appelée lorsqu'un utilisateur ferme un projet et ne souhaite
+ * pas enregistrer les modifications qu'il a faites.
  */
 package Requests;
 
-import Classes.Data;
-import Classes.DataSimple;
 import Managers.ProjectManager;
 import Managers.ProjectManagerImpl;
-import Managers.SyncManagerImpl;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;

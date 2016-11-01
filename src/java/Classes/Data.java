@@ -1,3 +1,11 @@
+/**
+ * CLASSE Data
+ * ----------------------------------------------------------
+ * Cette classe représente toutes les données d'un projet :
+ * le projet lui-même, ses photos, sa position gps, la localisation des photos
+ * et les éléments des photos. 
+ */
+
 package Classes;
 
 import java.util.ArrayList;

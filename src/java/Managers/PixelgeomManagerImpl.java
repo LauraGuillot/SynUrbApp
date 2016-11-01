@@ -1,7 +1,12 @@
+/**
+ * Classe PixelgeomManagerImpl
+ * ----------------------------------------------------------
+ * Implémentation de l'interface PixelgeomManager.
+ * Manipulation des pixelgeom de la base de données
+ */
 package Managers;
 
 import Classes.Element;
-import Classes.Gpsgeom;
 import Classes.Pixelgeom;
 import Classes.Project;
 import java.util.List;
@@ -95,7 +100,7 @@ public class PixelgeomManagerImpl implements PixelgeomManager {
         q.setParameter("id", g.getPixelgeomId());
         List l = q.getResultList();
 
-        if (l.isEmpty()||!belongToProject(g,p)) {
+        if (l.isEmpty() || !belongToProject(g, p)) {
             this.savePixelgeom(g);
         } else {
             this.updatePixelgeom(g);
@@ -103,20 +108,27 @@ public class PixelgeomManagerImpl implements PixelgeomManager {
 
     }
 
-    
-     public boolean belongToProject(Pixelgeom pix, Project p){
-       EntityManager em = emf.createEntityManager();
+    /**
+     * Test si un pixelgeom est lié ou non àun projet. Il est lié au projet si
+     * il est la géométrie d'un élément d'une des photos du projet.
+     *
+     * @param pix Pixel geom
+     * @param p Projet
+     * @return booléen
+     */
+    public boolean belongToProject(Pixelgeom pix, Project p) {
+        EntityManager em = emf.createEntityManager();
         Query q = em.createQuery("SELECT e FROM Element e WHERE ( e.pixelgeomId.pixelgeomId=:id)");
         q.setParameter("id", pix.getPixelgeomId());
         List l = q.getResultList();
-        
-        if(l.isEmpty()){
+
+        if (l.isEmpty()) {
             return false;
-        }else{
-            Element e = (Element)l.get(0);
-            return e.getPhotoId().getProjectId().getProjectId()==p.getProjectId();
+        } else {
+            Element e = (Element) l.get(0);
+            return e.getPhotoId().getProjectId().getProjectId() == p.getProjectId();
         }
-         
+
     }
-    
+
 }

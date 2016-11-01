@@ -1,3 +1,9 @@
+/**
+ * Classe JsonTrnsformer
+ * ----------------------------------------------------------
+ * Cette classe permet la  conversion des objets Java en json et vice versa
+ * pour les transferts entre le serveur et l'application.
+ */
 package Requests;
 
 import Classes.Data;
@@ -12,11 +18,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.util.ArrayList;
 
-/**
- * Classe pour transformer les données en json et vice versa
- *
- * @author Laura
- */
 public class JsonTransformer {
 
     private final static GsonBuilder builder = new GsonBuilder();
@@ -50,43 +51,42 @@ public class JsonTransformer {
      */
     public static String ListProjectsToJson(ArrayList<Project> p) {
         ProjectSimple[] ps = new ProjectSimple[p.size()];
-        for (int i=0;i<p.size();i++) {
-            ps[i]=new ProjectSimple(p.get(i));
+        for (int i = 0; i < p.size(); i++) {
+            ps[i] = new ProjectSimple(p.get(i));
         }
-      
-        return gson.toJson(ps,ProjectSimple[].class);
-    
+
+        return gson.toJson(ps, ProjectSimple[].class);
+
     }
-    
+
     /**
      * Convertir une liste de matériaux en json
+     *
      * @param m liste de materiaux
      * @return json
      */
     public static String ListMaterToJson(ArrayList<Material> m) {
         MaterialSimple[] ms = new MaterialSimple[m.size()];
-        for (int i=0;i<m.size();i++) {
-            ms[i]=new MaterialSimple(m.get(i));
+        for (int i = 0; i < m.size(); i++) {
+            ms[i] = new MaterialSimple(m.get(i));
         }
-      
-        return gson.toJson(ms,ProjectSimple[].class);
+
+        return gson.toJson(ms, ProjectSimple[].class);
     }
-    
-     /**
+
+    /**
      * Convertir une liste de types
+     *
      * @param t liste de types
      * @return json
      */
     public static String ListTypeToJson(ArrayList<ElementType> t) {
         ElementTypeSimple[] ts = new ElementTypeSimple[t.size()];
-        for (int i=0;i<t.size();i++) {
-            ts[i]=new ElementTypeSimple(t.get(i));
+        for (int i = 0; i < t.size(); i++) {
+            ts[i] = new ElementTypeSimple(t.get(i));
         }
-      
-        return gson.toJson(ts,ProjectSimple[].class);
-    }
 
- 
-    
+        return gson.toJson(ts, ProjectSimple[].class);
+    }
 
 }

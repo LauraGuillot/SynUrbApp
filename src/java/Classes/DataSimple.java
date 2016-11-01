@@ -1,7 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * CLASSE DataSimple
+ * ----------------------------------------------------------
+ * Cette classe représente toutes les données d'un projet telles qu'elles sont
+ * décrites dans l'appliation Android.
+ * Elle est utilisée pour la transmission des données car elle est compatible avec
+ * les classes de l'application android.
  */
 package Classes;
 
@@ -21,6 +24,11 @@ public class DataSimple {
     private ArrayList<ArrayList<ElementSimple>> elements;
     private ArrayList<ArrayList<PixelgeomSimple>> elements_pixelgeom;
 
+    /**
+     * Constructeur : création d'une dataSimple à partir d'une data
+     *
+     * @param data Data à copier
+     */
     public DataSimple(Data data) {
         project = new ProjectSimple(data.getProject());
         project_gpsgeom = new GpsGeomSimple(data.getProject_gpsgeom());
@@ -55,6 +63,11 @@ public class DataSimple {
 
     }
 
+    /**
+     * Conversion d'un DataSimple en data
+     *
+     * @return Data
+     */
     public Data toData() {
 
         //Projet 
@@ -145,7 +158,5 @@ public class DataSimple {
     public void setElements_pixelgeom(ArrayList<ArrayList<PixelgeomSimple>> elements_pixelgeom) {
         this.elements_pixelgeom = elements_pixelgeom;
     }
-    
-    
-    
+
 }

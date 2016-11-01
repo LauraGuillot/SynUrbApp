@@ -1,7 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Classe ProjectListRequest
+ * ----------------------------------------------------------
+ * Servlet appelée à l'ouverture de l'application pour récupérer la liste des projets
  */
 package Requests;
 
@@ -37,7 +37,7 @@ public class ProjectListRequest extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             out.println(request.getAttribute("project_list"));
-       
+
         }
     }
 
@@ -52,15 +52,17 @@ public class ProjectListRequest extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        //On récupère tous les projets de la base de données
         ProjectManager projectManager = ProjectManagerImpl.getInstance();
-       Collection<Project> p = projectManager.listProjects();
-       ArrayList<Project> p1 = new ArrayList<>();
-       p.stream().forEach((pr) -> {
-           p1.add(pr);
-       });
-       request.setAttribute("project_list", JsonTransformer.ListProjectsToJson(p1));
+        Collection<Project> p = projectManager.listProjects();
+        ArrayList<Project> p1 = new ArrayList<>();
+        p.stream().forEach((pr) -> {
+            p1.add(pr);
+        });
+
+        //On envoie les projets
+        request.setAttribute("project_list", JsonTransformer.ListProjectsToJson(p1));
         processRequest(request, response);
     }
 
- 
 }

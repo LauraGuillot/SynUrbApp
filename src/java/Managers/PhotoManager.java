@@ -1,14 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Interface PhotoManager
+ * ----------------------------------------------------------
+ * Définition des méthodes pour manipuler les photos de la base de données
  */
 package Managers;
 
 import Classes.Element;
 import Classes.Photo;
 import java.util.ArrayList;
-import java.util.Collection;
 
 /**
  *
@@ -51,7 +50,7 @@ public interface PhotoManager {
     /**
      * Récupérer la liste des éléments d'une photo
      *
-     * @param p  photo
+     * @param p photo
      * @return Collection d'éléments
      */
     public ArrayList<Element> getElementsOfPhoto(Photo p);
@@ -63,9 +62,11 @@ public interface PhotoManager {
      * @return Photo mise à jour
      */
     public Photo updatePhoto(Photo p);
-    
-     /**
-     * Synchronisation d'une photo : mise à jour si elle existe déjà ou ajout sinon
+
+    /**
+     * Synchronisation d'une photo : mise à jour si elle existe déjà ou ajout
+     * sinon
+     *
      * @param p Photo à synchroniser
      * @return Photo synchronisée
      */

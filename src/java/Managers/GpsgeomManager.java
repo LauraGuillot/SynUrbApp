@@ -1,3 +1,8 @@
+/**
+ * Interface GpsgeomManager
+ * ----------------------------------------------------------
+ * Définition des méthodes pour manipuler les gpsgeom de la base de données
+ */
 package Managers;
 
 import Classes.Gpsgeom;

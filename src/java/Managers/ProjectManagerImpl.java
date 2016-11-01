@@ -1,3 +1,9 @@
+/**
+ * Classe ProjectManagerImpl
+ * ----------------------------------------------------------
+ * Implémentation de l'interface ProjectManager.
+ * Manipulation des projets de la base de données
+ */
 package Managers;
 
 import Classes.Photo;
@@ -40,7 +46,7 @@ public class ProjectManagerImpl implements ProjectManager {
     @Override
     public Collection<Project> listProjects() {
         EntityManager em = emf.createEntityManager();
-       Query q = em.createNamedQuery("Project.findAll");
+        Query q = em.createNamedQuery("Project.findAll");
         Collection theList = q.getResultList();
         return theList;
     }
@@ -57,7 +63,7 @@ public class ProjectManagerImpl implements ProjectManager {
         Query q = em.createNamedQuery("Project.findByProjectId");
         q.setParameter("projectId", id);
         List l = q.getResultList();
-        return l.isEmpty()?null:(Project) l.get(0);
+        return l.isEmpty() ? null : (Project) l.get(0);
     }
 
     /**
@@ -72,7 +78,7 @@ public class ProjectManagerImpl implements ProjectManager {
         Query q = em.createNamedQuery("Project.findByProjectName");
         q.setParameter("projectName", name);
         List l = q.getResultList();
-        return l.isEmpty()?null:(Project) l.get(0);
+        return l.isEmpty() ? null : (Project) l.get(0);
     }
 
     /**
@@ -105,81 +111,86 @@ public class ProjectManagerImpl implements ProjectManager {
         em.getTransaction().commit();
 
     }
-    
+
     /**
      * Mise à jour d'un projet
+     *
      * @param newp Projet avec les mises à jour
      * @return Projet mis à jour
      */
     @Override
-    public Project updateProject(Project newp){
+    public Project updateProject(Project newp) {
         Project oldp = getProjectById(newp.getProjectId());
         oldp.setGpsgeomId(newp.getGpsgeomId());
         oldp.setProjectDescription(newp.getProjectDescription());
         oldp.setProjectName(newp.getProjectName());
-        oldp.setProjectVersion(oldp.getProjectVersion()+1);
+        oldp.setProjectVersion(oldp.getProjectVersion() + 1);
         newp.setProjectVersion(oldp.getProjectVersion());
-        
+
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         em.merge(oldp);
         em.getTransaction().commit();
-         return newp;
+        return newp;
     }
-    
+
     /**
      * Ajout d'un projet dans la base
+     *
      * @param p Projet à ajouter (sans id)
      * @return Projet ajouté (avec id)
      */
     @Override
-    public Project saveProject(Project p){
-        
-        Project p1  = new Project();
+    public Project saveProject(Project p) {
+
+        Project p1 = new Project();
         p1.setGpsgeomId(p.getGpsgeomId());
         p1.setProjectName(p.getProjectName());
         p1.setProjectDescription(p.getProjectDescription());
         p1.setProjectIsavailable(p.getProjectIsavailable());
         p1.setProjectVersion(p.getProjectVersion());
-        
+
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         em.persist(p1);
         em.getTransaction().commit();
-        
+
         return this.getProjectByName(p.getProjectName());
     }
-    
+
     /**
      * Récupérer la liste des photos d'un projet
+     *
      * @param id Id du projet
      * @return Collection de photos
      */
     @Override
-    public Collection<Photo> getPhotoOfProject (Long id){
+    public Collection<Photo> getPhotoOfProject(Long id) {
         EntityManager em = emf.createEntityManager();
         Query q = em.createQuery("SELECT p FROM Photo p WHERE (p.projectId=:id)");
         q.setParameter("id", this.getProjectById(id));
         List l = q.getResultList();
-       return l;
+        return l;
     }
 
     /**
-     * Synchronisation d'un projet : mise à jour si il existe déjà ou ajout sinon
+     * Synchronisation d'un projet : mise à jour si il existe déjà ou ajout
+     * sinon
+     *
      * @param p Projet à synchroniser
      * @return Projet synchronisé
      */
     @Override
-    public Project sync(Project p){
+    public Project sync(Project p) {
         Project p1 = this.getProjectById(p.getProjectId());
- 
-        if(p1==null ){
-            p1=this.saveProject(p);
+
+        if (p1 == null) {
+            p1 = this.saveProject(p);
             System.out.println(p1.getProjectId());
-        }else{
+        } else {
             p1 = this.updateProject(p);
         }
         return p1;
     }
-  
+
 }

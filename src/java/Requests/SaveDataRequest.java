@@ -1,20 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Classe SaveDataRequest
+ * ----------------------------------------------------------
+ * Servlet appelée à chaque fois qu'un utilisateur veut sauvegarder ses données.
+ * On synchronise alors les données de l'appli avec celle du serveur.
  */
 package Requests;
 
 import Classes.Data;
 import Classes.DataSimple;
-import Managers.ProjectManager;
-import Managers.ProjectManagerImpl;
-import Managers.SyncManager;
 import Managers.SyncManagerImpl;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URLDecoder;
-import java.net.URLEncoder;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -39,11 +36,11 @@ public class SaveDataRequest extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       
+
         //On récupère les données à sauvegarder
         String datajson = request.getParameter("data");
         datajson = URLDecoder.decode(datajson, "UTF-8");
-        DataSimple d = JsonTransformer.JsontoData(datajson);  
+        DataSimple d = JsonTransformer.JsontoData(datajson);
         Data data = d.toData();
 
         //Synchronisation
@@ -51,10 +48,10 @@ public class SaveDataRequest extends HttpServlet {
         sman.UpdateData(data);
 
         //On renvoie les données
-        String json = JsonTransformer.DatatoJson(sman.prepareExport(Long.parseLong(data.getProject().getProjectId()+"")));
+        String json = JsonTransformer.DatatoJson(sman.prepareExport(Long.parseLong(data.getProject().getProjectId() + "")));
         try (PrintWriter out = response.getWriter()) {
             out.println(json);
-       
+
         }
         System.out.println(json);
         request.setAttribute("data", json);
