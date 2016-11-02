@@ -4,7 +4,6 @@
  * Implémentation de l'interface ElementManager.
  * Manipulation des éléments de la base de données
  */
-
 package Managers;
 
 import Classes.Element;
@@ -106,7 +105,7 @@ public class ElementManagerImpl implements ElementManager {
 
         List l = q.getResultList();
 
-        if (l.isEmpty()|| ((Element)l.get(0)).getPhotoId().getProjectId().getProjectId()!=e.getPhotoId().getProjectId().getProjectId()) {
+        if (l.isEmpty() || ((Element) l.get(0)).getPhotoId().getProjectId().getProjectId() != e.getPhotoId().getProjectId().getProjectId()) {
             System.out.println("save");
             this.saveElement(e);
         } else {
@@ -148,6 +147,7 @@ public class ElementManagerImpl implements ElementManager {
 
     /**
      * Lister tous les types d'élément de la base de données
+     *
      * @return liste des types d'élément existants
      */
     @Override
@@ -165,6 +165,7 @@ public class ElementManagerImpl implements ElementManager {
 
     /**
      * Lister tous les matériaux de la base de données
+     *
      * @return liste les matériaux existants
      */
     @Override
@@ -178,6 +179,26 @@ public class ElementManagerImpl implements ElementManager {
             m.add((Material) o);
         }
         return m;
+    }
+
+    /**
+     * Ajout de la liste des matériaux du fichier CSV à la base de données
+     *
+     * @param mater liste des matériaux
+     */
+    @Override
+    public void saveMater(ArrayList<Material> mater) {
+        EntityManager em = emf.createEntityManager();
+        Query q = em.createNamedQuery("Material.findAll");
+        List l = q.getResultList();
+
+        if (l.isEmpty()) {
+            for (Material m : mater) {
+                em.getTransaction().begin();
+                em.persist(m);
+                em.getTransaction().commit();
+            }
+        }
     }
 
 }

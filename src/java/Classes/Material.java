@@ -47,9 +47,9 @@ public class Material implements Serializable {
     @Column(name = "material_name")
     private String materialName;
     @Column(name = "material_heat_capa")
-    private Integer materialHeatCapa;
+    private Double materialHeatCapa;
     @Column(name = "material_mass_density")
-    private Integer materialMassDensity;
+    private Double materialMassDensity;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "material_conduct")
     private Double materialConduct;
@@ -84,19 +84,19 @@ public class Material implements Serializable {
         this.materialName = materialName;
     }
 
-    public Integer getMaterialHeatCapa() {
+    public Double getMaterialHeatCapa() {
         return materialHeatCapa;
     }
 
-    public void setMaterialHeatCapa(Integer materialHeatCapa) {
+    public void setMaterialHeatCapa(Double materialHeatCapa) {
         this.materialHeatCapa = materialHeatCapa;
     }
 
-    public Integer getMaterialMassDensity() {
+    public Double getMaterialMassDensity() {
         return materialMassDensity;
     }
 
-    public void setMaterialMassDensity(Integer materialMassDensity) {
+    public void setMaterialMassDensity(Double materialMassDensity) {
         this.materialMassDensity = materialMassDensity;
     }
 

@@ -8,6 +8,7 @@ package Requests;
 import Classes.Project;
 import Managers.ProjectManager;
 import Managers.ProjectManagerImpl;
+import Parser.MaterialCSVParser;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -60,6 +61,9 @@ public class ProjectListRequest extends HttpServlet {
             p1.add(pr);
         });
 
+        //On charge la liste des matériaux
+        MaterialCSVParser.readCSV();
+      
         //On envoie les projets
         request.setAttribute("project_list", JsonTransformer.ListProjectsToJson(p1));
         processRequest(request, response);

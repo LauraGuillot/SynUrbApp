@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<materiaux>
+  <materiau>
+    <nom>beton</nom>
+    <conductivite>1.75</conductivite>
+    <capacite_thermique>1000</capacite_thermique>
+    <masse_volumique>2300</masse_volumique>
+  </materiau>
+
+  <materiau>
+    <nom>laine_roche</nom>
+    <conductivite>0.04</conductivite>
+    <capacite_thermique>1000</capacite_thermique>
+    <masse_volumique>30</masse_volumique>
+  </materiau>
+
+  <materiau>
+    <nom>verre</nom>
+    <conductivite>1</conductivite>
+    <capacite_thermique>750</capacite_thermique>
+    <masse_volumique>2500</masse_volumique>
+  </materiau>
+
+  <materiau>
+    <nom>terre</nom>
+    <conductivite>0.7</conductivite>
+    <capacite_thermique>900</capacite_thermique>
+    <masse_volumique>1600</masse_volumique>
+  </materiau>
+
+  <materiau>
+    <nom>asphalte</nom>
+    <conductivite>0.75</conductivite>
+    <capacite_thermique>950</capacite_thermique>
+    <masse_volumique>2100</masse_volumique>
+  </materiau>
+
+  <materiau>
+    <nom>air</nom>
+    <conductivite>0.04</conductivite>
+    <capacite_thermique>1000</capacite_thermique>
+    <masse_volumique>1.25</masse_volumique>
+  </materiau>
+
+</materiaux>
+
+
+
+
+
+

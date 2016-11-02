@@ -3,7 +3,6 @@
  * ----------------------------------------------------------
  * Définition des méthodes pour manipuler les éléments de la base de données
  */
-
 package Managers;
 
 import Classes.Element;
@@ -42,30 +41,41 @@ public interface ElementManager {
      * @param e Element à synchroniser
      */
     public void sync(Element e);
-    
+
     /**
      * Récupérer un materiau avec son id
+     *
      * @param id id du materiau
-     * @return  Materiau
+     * @return Materiau
      */
-     public Material getMaterialById(long id) ;
-     
-     /**
+    public Material getMaterialById(long id);
+
+    /**
      * Récupérer un element type avec son id
+     *
      * @param id id de l'element type
-     * @return  Element type
+     * @return Element type
      */
     public ElementType getElementTypeById(long id);
 
     /**
      * Lister tous les types d'élément de la base de données
+     *
      * @return liste des types d'élément existants
      */
     public ArrayList<ElementType> getElementTypes();
 
-     /**
+    /**
      * Lister tous les matériaux de la base de données
+     *
      * @return liste les matériaux existants
      */
     public ArrayList<Material> getMaterials();
+
+    /**
+     * Ajout de la liste des matériaux du fichier CSV à la base de données
+     *
+     * @param mater liste des matériaux
+     */
+    public void saveMater(ArrayList<Material> mater);
 }
