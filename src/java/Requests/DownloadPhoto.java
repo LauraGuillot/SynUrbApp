@@ -7,11 +7,15 @@
 package Requests;
 
 import Classes.Photo;
+import Managers.PhotoManager;
+import Managers.PhotoManagerImpl;
 import Managers.ProjectManager;
 import Managers.ProjectManagerImpl;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Collection;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -54,17 +58,20 @@ public class DownloadPhoto extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        //On récupère l'id du projet à ouvrir
-        long id = Long.parseLong(request.getParameter("projectid"));
+         //On récupère l'id de la photo à ouvrir
+        int id = Integer.parseInt(request.getParameter("photoid"));
 
-        //On récupère la liste des photos du projet
-        ProjectManager projectManager = ProjectManagerImpl.getInstance();
-        Collection<Photo> photos = projectManager.getPhotoOfProject(id);
+        //On récupère la lphoto
+        PhotoManager manager = PhotoManagerImpl.getInstance();
+        Photo p = manager.getPhotoById(id);
 
-        response.setContentType("image/gif");
-        OutputStream out = response.getOutputStream();
-        //TODO
-
+        //On l'envoie
+        response.setContentType("image/jpg");
+        OutputStream out = response.getOutputStream();      
+        byte[] bytes = PhotoUtil.extractBytes(p.getPhotoPath());
+        int length = bytes.length;
+        response.setContentLength(length);
+        out.write(bytes);
+        out.flush();   
     }
-
 }

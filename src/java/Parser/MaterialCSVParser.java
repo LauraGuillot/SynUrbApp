@@ -1,11 +1,14 @@
+/**
+ * CLASSE MaterialCSVParser
+ * -----------------------------
+ * Parser pour la liste des matériaux des fichiers csv et xml
+ */
 package Parser;
 
 import Classes.Material;
 import Managers.ElementManager;
 import Managers.ElementManagerImpl;
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -17,7 +20,6 @@ import java.util.logging.Logger;
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.JDOMException;
-import static org.jdom2.filter.Filters.document;
 import org.jdom2.input.SAXBuilder;
 
 public class MaterialCSVParser {
@@ -85,12 +87,10 @@ public class MaterialCSVParser {
             br.readLine();//Ligne de description
             br.readLine();//Ligne de description
             br.readLine();//Ligne de description
-            while ((line = br.readLine()) != null) {
-                System.out.println(line);
+            while ((line = br.readLine()) != null) { 
                 n++;
                 Material m = lineToMater(line);
-                m.setMaterialId(n);
-                System.out.println(m.getMaterialName() + "-" + m.getMaterialConduct() + "-" + m.getMaterialHeatCapa() + "-" + m.getMaterialMassDensity());
+                m.setMaterialId(n);             
                 mater.add(m);
             }
             //Ajout du fichier xml
@@ -150,7 +150,6 @@ public class MaterialCSVParser {
                 m.setMaterialMassDensity(dens);
                 m.setMaterialName(name);
                 m.setMaterialId(mater.size() + 1);
-                System.out.println(m.getMaterialName() + "-" + m.getMaterialConduct() + "-" + m.getMaterialHeatCapa() + "-" + m.getMaterialMassDensity());
                 mater.add(m);
             }
         } catch (IOException ex) {
