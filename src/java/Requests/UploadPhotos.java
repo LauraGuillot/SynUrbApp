@@ -60,12 +60,12 @@ public class UploadPhotos extends HttpServlet {
            pix = responseStreamReader.readLine();
            
         }
-        
-       // byte[] bytes = pix.getBytes();
+        byte[] bytes = pix.getBytes();
         
       
         responseStreamReader.close();
 
+        //Erreur sur cette ligne
        // PhotoUtil.savePicture(header, bytes);
     }
 
